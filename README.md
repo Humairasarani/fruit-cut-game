@@ -27,5 +27,6 @@ A simple browser-based Fruit Cut game built using **HTML, CSS, and JavaScript**.
 Coming soon...
 
 ## 📸 Screenshot
+## 📸 Screenshot
 
-Coming soon...
+![Fruit Cut Game](Screenshot 2026-08-28 141147.png)

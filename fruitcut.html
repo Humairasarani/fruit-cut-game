@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>fruit cut </title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #game {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(white, green);
+            position: relative;
+            overflow: hidden;
+            cursor: crosshair;
+
+        }
+
+        .fruit {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            font-size: 60px;
+            user-select: none;
+
+
+        }
+
+        #score {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: white;
+            padding: 10px;
+            font-size: 30px;
+            border-radius: 10px;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game"></div>
+    <div id="score">score:0</div>
+    <script>
+        const game = document.getElementById("game");
+        const scoreBox = document.getElementById("score");
+        let score = 0;
+        const fruits = ["🍎", "🍉", "🍊", "🍓", "🍌"];
+
+        function createFruit() {
+
+            const fruit = document.createElement("div");
+
+            fruit.className = "fruit";
+
+            fruit.innerHTML =
+                fruits[Math.floor(Math.random() * fruits.length)];
+
+            let x = Math.random() * (window.innerWidth - 100);
+
+            let y = window.innerHeight;
+
+            let speedY = 12 + Math.random() * 3;
+
+            let gravity = 0.4;
+
+            fruit.style.left = x + "px";
+
+            fruit.style.top = y + "px";
+
+            game.appendChild(fruit);
+
+            function animate() {
+
+                y -= speedY;
+
+                speedY -= gravity;
+                fruit.style.top = y + "px";
+                if (y > window.innerHeight + 100 && speedY < 0) {
+                    fruit.remove();
+                    return;
+                }
+                if (document.body.contains(fruit)) {
+                    requestAnimationFrame(animate);
+
+                }
+
+            }
+            animate();
+        }
+
+        setInterval(createFruit, 1000);
+
+        game.addEventListener("mousemove", function (e) {
+
+            const allFruits = document.querySelectorAll(".fruit");
+
+            allFruits.forEach(function (fruit) {
+
+                const box = fruit.getBoundingClientRect();
+
+                if (
+                    e.clientX > box.left &&
+                    e.clientX < box.right &&
+                    e.clientY > box.top &&
+                    e.clientY < box.bottom
+                ) {
+
+                    fruit.innerHTML = "💥";
+
+                    score++;
+
+                    scoreBox.innerHTML = "score: " + score;
+
+                    setTimeout(function () {
+
+                        if (document.body.contains(fruit)) {
+                            fruit.remove();
+                        }
+
+                    }, 100);
+
+                }
+
+            });
+
+        });
+
+
+    </script>
+</body>
+
+</html>

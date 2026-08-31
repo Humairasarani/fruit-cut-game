@@ -23,8 +23,7 @@ A simple browser-based Fruit Cut game built using **HTML, CSS, and JavaScript**.
 - Simple game interface
 
 ## 🚀 Live Demo
-
-Coming soon...
+https://humairasarani.github.io/fruit-cut-game/
 
 ## 📸 Screenshot
 ## 📸 Screenshot
